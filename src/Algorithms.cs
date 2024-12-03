@@ -1,25 +1,14 @@
-﻿using System.Diagnostics;
+﻿namespace ITACheck.Semestre3;
 
-namespace ITACheck.Semestre3;
-
-public class Program
+public static class Algorithms
 {
-	public static void Main(string[] args)
-	{
-		const int n = 1_000_000;
-		int[] array = new int[n];
-		RandomizeArray(array);
-		TestAlgorithm(array, (array) => QuickSort(array, 0, array.Length - 1), "Quick sort");
-	}
-
-	#region Algorithms
-
 	/// <summary>
 	/// Ordena un array de enteros usando el algoritmo de ordenamiento Bubble sort.
 	/// </summary>
 	/// <param name="array">El array a ordenar.</param>
-	private static void BubbleSort(int[] array)
+	public static void BubbleSort(int[] array)
 	{
+		// frick you
 		for (int i = 0; i < array.Length - 1; i++)
 		{
 			bool swapped = false;
@@ -42,7 +31,7 @@ public class Program
 	/// Ordena un array de enteros usando el algoritmo de ordenamiento Selection sort.
 	/// </summary>
 	/// <param name="array">El array a ordenar.</param>
-	private static void SelectionSort(int[] array)
+	public static void SelectionSort(int[] array)
 	{
 		for (int i = 0; i < array.Length - 1; i++)
 		{
@@ -62,7 +51,7 @@ public class Program
 	/// Ordena un array de enteros usando el algoritmo de ordenamiento Insertion sort.
 	/// </summary>
 	/// <param name="array">El array a ordenar.</param>
-	private static void InsertionSort(int[] array)
+	public static void InsertionSort(int[] array)
 	{
 		for (int i = 1; i < array.Length; ++i)
 		{
@@ -81,7 +70,7 @@ public class Program
 	/// Ordena un array de enteros usando el algoritmo de ordenamiento Quick sort.
 	/// </summary>
 	/// <param name="array">El array a ordenar.</param>
-	private static void QuickSort(int[] array, int low, int high)
+	public static void QuickSort(int[] array, int low, int high)
 	{
 		// dude wtf how is this thing so fast
 		int i = low;
@@ -113,39 +102,4 @@ public class Program
 			QuickSort(array, i, high);
 		}
 	}
-
-	#endregion
-
-	#region Tests
-
-	private static void RandomizeArray(int[] array)
-	{
-		Random random = new();
-		for (int i = 0; i < array.Length; i++)
-		{
-			array[i] = random.Next();
-		}
-	}
-
-	private static void TestAlgorithm(int[] array, Action<int[]> algorithm, string algorithmName)
-	{
-		// measure sorting time.
-		Stopwatch watch = Stopwatch.StartNew();
-		algorithm(array);
-		watch.Stop();
-		Console.WriteLine($"Tiempo de ejecución ({algorithmName}, {array.Length} elementos): {watch}");
-
-		// ensure the algorithm sorted the array correctly.
-		Console.WriteLine($"Muestra de 100 elementos en la mitad del array:");
-		for (int i = 0; i < 100; i++)
-		{
-			Console.Write(array[(array.Length / 2) + i]);
-			if (i + 1 != 100) // todo nye
-			{
-				Console.Write(", ");
-			}
-		}
-	}
-
-	#endregion
 }
